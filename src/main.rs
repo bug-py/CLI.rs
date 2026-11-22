@@ -1,8 +1,8 @@
-use std::io::{stdout,stdin,Write};
 mod command;
+use std::io::{stdout,stdin,Write};
+
 fn main() {
     let mut input=String::new();
-    let  quit= command::Command{name:"QUIT".to_string(),help:"Quit CLI".to_string(),func:main,argc:0};
     loop{
         print!("    >> ");
 
@@ -15,6 +15,9 @@ fn main() {
         stdin()
             .read_line(&mut input)
             .expect("Failed to read");
+        
+        let line :Vec<&str>=input.trim().split_whitespace().collect();
+        (command::QUIT.func)(line);
     }
 
 }
